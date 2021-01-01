@@ -13,14 +13,25 @@ export default class Chat extends React.Component {
     alertMyText(input = []) {
         Alert.alert(input.text);
     };
+
     render() {
-        //let name = this.props.route.params.name; // OR ...   BOTH throws an ERROR "Cannot read property 'name' of undefined"
-        //let { name } = this.props.route.params;
+
+        // Inherit username edited on start-page
+        let { name } = this.props.route.params;
         this.props.navigation.setOptions({ title: name });
-        // alert the user input
+
+        // Inherit color chosen on start-page (does not work unfortunately)
+        let { colorChoice } = this.props.route.params;
+        this.props.navigation.setOptions({ backgroundColor: colorChoice });
 
         return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <View
+                style={{
+                    flex: 1,
+                    backgroundColor: { colorChoice },
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
                 <ScrollView>
                     <Text>This is the chat</Text>
                     <Text>You wrote: {this.state.text}</Text>

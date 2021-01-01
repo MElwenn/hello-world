@@ -1,57 +1,59 @@
-import React, { Component } from 'react';
-import { View, Text, TextInput, Button, ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { View, Text, TextInput, ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
 
 // backgorund image from project brief
 const backgroundImage = require('../assets/Background_Image.png');
-
-// Background color options HEX codes from project brief
-// const colorOptions = ['#090C08', '#474056', '#8A95A5', '#B9C6AE'];
+//const icon = require('../assets/icon.svg')
 
 export default class Start extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { name: '', backgroundColor: '' };
+        this.state = { name: '', colorChoice: '' };
     }
+
     render() {
-        //let name = this.props.route.params.name; // OR ...   BOTH throws an ERROR "Cannot read property 'name' of undefined"
-        //let { name } = this.props.route.params;
         return (
             <ImageBackground source={backgroundImage} style={{ width: '100%', height: '100%' }}>
                 <Text style={styles.title}>Chat Bubble</Text>
-                <View style={styles.container}>  {/* { flex: 1, justifyContent: 'center', alignItems: 'center' } */}
-
+                <View style={styles.container}>
+                    {/* <Image source={require('../assets/icon.svg')} /> */}
+                    {/* why the border is ignored simply? */}
                     <TextInput
-                        style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-                        onChangeText={(text) => this.setState({ text })}
-                        value={this.state.text}
+                        borderWidth="1"
+                        borderColor="#757083"
+                        style={styles.textInput}
+                        onChangeText={(text) => this.setState({ name: text })}
+                        value={this.state.name}
                         placeholder='Your name ...'
                     />
-                    <Text style={styles.text}>Coose backgorund color: </Text>
+                    <View style={styles.text}>
+                        <Text style={styles.text}>Choose backgorund color: </Text>
+                    </View>
                     <View style={styles.colorOption}>
+                        {/* the color chosen is ignored currently */}
                         <TouchableOpacity
-                            onPress={() => this.setState({ colorOption: "#090C08" })}
+                            onPress={() => this.setState({ colorChoice: "#090C08" })}
                             style={[styles.colorRadio, styles.color1]}>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            onPress={() => this.setState({ colorOption: "#474056" })}
+                            onPress={() => this.setState({ colorChoice: "#474056" })}
                             style={[styles.colorRadio, styles.color2]}>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            onPress={() => this.setState({ colorOption: "#8A95A5" })}
+                            onPress={() => this.setState({ colorChoice: "#8A95A5" })}
                             style={[styles.colorRadio, styles.color3]}>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            onPress={() => this.setState({ colorOption: "#B9C6AE" })}
+                            onPress={() => this.setState({ colorChoice: "#B9C6AE" })}
                             style={[styles.colorRadio, styles.color4]}>
                         </TouchableOpacity>
                     </View>
-                    <Button
-                        style={styles.button} // removed: color="#757083"
-                        color="#757083"
-                        title="Start chatting"
-                        onPress={() => this.props.navigation.navigate('Chat')} // removed , { name: this.state.name } as it throws an error
-                    />
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => this.props.navigation.navigate('Chat', { name: this.state.name, colorChoice: this.state.colorChoice })}>
+                        <Text style={styles.buttonText}>Start Chatting</Text>
+                    </TouchableOpacity>
                 </View>
             </ImageBackground>
         )
@@ -61,7 +63,7 @@ export default class Start extends React.Component {
 /* Styling section */
 const styles = StyleSheet.create({
     title: {
-        alignItems: "center",
+        alignSelf: "center",
         justifyContent: "center",
         fontSize: 45,
         fontWeight: 600,
@@ -69,6 +71,7 @@ const styles = StyleSheet.create({
         flex: 1,
         marginTop: 80
     },
+
     container: {
         backgroundColor: "#ffffff",
         flex: 1,
@@ -78,33 +81,43 @@ const styles = StyleSheet.create({
         width: "88%",
         margin: 20
     },
-    inputBox: {
-        fontSize: 16,
-        fontWeight: 600,
-        color: "#000000",
-        borderColor: "grey",
-        width: "88%",
-        marginTop: 30,
-        marginBottom: 30,
-
-    },
     text: {
         fontSize: 16,
         fontWeight: 300,
-        color: "#757083"
+        color: "#757083",
+        borderColor: "#757083",
+        borderWidth: "1.5",
+        width: "88%",
+        height: "20%",
+        marginTop: "5%",
+    },
+    /* why the border is ignored simply? */
+    textInput: {
+        fontSize: 16,
+        fontWeight: 300,
+        opacity: 50,
+        color: "#757083",
+        borderWidth: "1",
+        borderColor: "#757083",
+        width: "88%",
+        height: "50%",
+        marginTop: "5%",
     },
     colorOption: {
         flex: 4,
         flexDirection: "row",
-        alignItems: "flex-start",
-        justifyContent: "space-between",
-        margin: 15
+        alignSelf: "flex-start",
+        justifyContent: "space-around",
+        width: "88%",
+        paddingLeft: 2,
+        marginBottom: 20
     },
     colorRadio: {
         width: 30,
         height: 30,
         borderRadius: 20,
-        margin: 10
+        alignItems: "flex-start",
+        marginBottom: "10%",
     },
     color1: {
         backgroundColor: "#090C08"
@@ -119,9 +132,18 @@ const styles = StyleSheet.create({
         backgroundColor: "#B9C6AE"
     },
     button: {
+        backgroundColor: "#757083",
+        alignItems: "center",
+        borderRadius: 2,
+        width: "88%",
+        height: "20%",
+        margin: 20
+    },
+    buttonText: {
         fontSize: 16,
         fontWeight: 600,
         color: "#ffffff",
-        backgroundColor: "#757083"
+        marginTop: 10,
+        justifyContent: "center",
     }
 })
