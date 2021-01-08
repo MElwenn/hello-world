@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="641ed009-0352-4bfb-9b6c-5ad1a4f88c94" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/components/Chat.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/Chat.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1mYWkZvcsgtgmV8gOHFD6i9ASfq" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="641ed009-0352-4bfb-9b6c-5ad1a4f88c94" name="Default Changelist" comment="" />
+      <created>1609671148481</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1609671148481</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="104" y="48" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1609672311247">
+      <screen x="0" y="23" width="1280" height="726" />
+    </state>
+    <state x="104" y="48" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1280.726@0.23.1280.726" timestamp="1609672311247" />
+    <state x="110" y="143" width="1060" height="486" key="AVDManager" timestamp="1609672377365">
+      <screen x="0" y="23" width="1280" height="726" />
+    </state>
+    <state x="110" y="143" width="1060" height="486" key="AVDManager/0.23.1280.726@0.23.1280.726" timestamp="1609672377365" />
+    <state x="305" y="173" width="670" height="675" key="run.anything.popup" timestamp="1609672354593">
+      <screen x="0" y="23" width="1280" height="726" />
+    </state>
+    <state x="305" y="173" width="670" height="675" key="run.anything.popup/0.23.1280.726@0.23.1280.726" timestamp="1609672354593" />
+  </component>
+</project>

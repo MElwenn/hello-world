@@ -20,6 +20,10 @@ export default class Start extends React.Component {
                     {/* <Image source={require('../assets/icon.svg')} /> */}
                     {/* why the border is ignored simply? */}
                     <TextInput
+                        accessible={true}
+                        accessibilityLabel="enter your name"
+                        accessibilityHint="Lets others know your name."
+                        accessibilityRole="button"
                         borderWidth="1"
                         borderColor="#757083"
                         style={styles.textInput}
@@ -50,6 +54,10 @@ export default class Start extends React.Component {
                         </TouchableOpacity>
                     </View>
                     <TouchableOpacity
+                        accessible={true}
+                        accessibilityLabel="Start Chatting"
+                        accessibilityHint="Lets you enter the chat room."
+                        accessibilityRole="button"
                         style={styles.button}
                         onPress={() => this.props.navigation.navigate('Chat', { name: this.state.name, colorChoice: this.state.colorChoice })}>
                         <Text style={styles.buttonText}>Start Chatting</Text>
