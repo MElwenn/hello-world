@@ -15,6 +15,11 @@ export class Chat extends React.Component {
     constructor() {
         super();
 
+        //let createdAt;
+        //let createdAt = createdAt && createdAt.toDate && createdAt.toDate().getTime();
+        //this.createdAt = createdAt.toDate().getTime();
+        //this.createdAt = createdAt && createdAt.toDate && createdAt.toDate().getTime();
+
         this.state = {
             messages: [],
             user: {
@@ -22,11 +27,12 @@ export class Chat extends React.Component {
                 name: '',
                 avatar: ''
             },
-            uid: 0,  // is this really needed if I have ONE chatroom for all users anywhay?
+            uid: 0,  // is this really needed if I have ONE chatroom for all users anywhay? Assume: It is for distinction of users.
             loggedInText: '',
             isConnected: false,
             image: '',
-            location: ''
+            location: '',
+            //createdAt: createdAt.toDate(),
         }
 
         // allow app to connect to Firestore
@@ -64,10 +70,12 @@ export class Chat extends React.Component {
                 user: {
                     _id: user.uid,
                     name: this.props.route.params.name,
+                    //name: this.props.navigation.state.params.name,
                     avatar: 'https://placeimg.com/140/140/any'
                 },
                 //loggedInText: 'Hello there',
-                loggedInText: `${this.props.route.params.name} wrote`,
+                loggedInText: `${this.props.route.params.name} wrote`, // Expected .name to be passed, when bubble is rendered
+                //loggedInText: `${this.props.navigation.state.params.name} wrote:`,
                 messages: []
             });
 
@@ -111,9 +119,9 @@ export class Chat extends React.Component {
             messages.push({
                 _id: data._id,
                 text: data.text,
-                //text: data.text.toString(), // ERROR (console): Chat.js:116 Uncaught TypeError: Cannot read property 'toDate' of undefined 
+                //text: data.text.toString(), // ERROR (console): Chat.js:116 Uncaught TypeError: Cannot read property 'toString' of undefined 
                 createdAt: data.createdAt, // ERROR (browser): invalid date 
-                //createdAt: data.createdAt.toDate(),
+                //createdAt: data.createdAt.toDate(), //// ERROR (console): Chat.js:118 Uncaught TypeError: Cannot read property 'toDate' of undefined
                 //user: data.user,
                 user: {
                     _id: data.user._id,
@@ -136,7 +144,7 @@ export class Chat extends React.Component {
             _id: message._id,
             text: message.text || '',
             createdAt: message.createdAt,
-            user: message.user,
+            user: message.user,            // Expected .name to be passed, when bubble is rendered
             uid: this.state.uid,
             image: message.image || '',
             location: message.location || ''
