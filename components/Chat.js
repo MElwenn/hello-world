@@ -35,7 +35,7 @@ export class Chat extends React.Component {
             isConnected: false,
             image: '',
             location: '',
-            //createdAt: createdAt.toDate(),
+            createdAt: '',
         }
 
         // allow app to connect to Firestore
@@ -131,7 +131,8 @@ export class Chat extends React.Component {
                 _id: data._id,
                 text: data.text,
                 //text: data.text.toString(), // ERROR (console): Chat.js:116 Uncaught TypeError: Cannot read property 'toString' of undefined 
-                createdAt: data.createdAt, // ERROR (browser): invalid date 
+
+                createdAt: Date(data.createdAt), // ERROR (browser): invalid date 
                 //createdAt: data.createdAt.toDate(), //// ERROR (console): Chat.js:118 Uncaught TypeError: Cannot read property 'toDate' of undefined
                 //user: data.user,
                 user: {
