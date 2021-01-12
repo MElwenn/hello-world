@@ -1,6 +1,9 @@
 import React from 'react';
 import { KeyboardAvoidingView, Platform, View, StyleSheet } from 'react-native';
 import { GiftedChat, Bubble } from 'react-native-gifted-chat';
+import AsyncStorage from '@react-native-community/async-storage';
+import NetInfo from '@react-native-community/netinfo'; // missing in depencies: "@react-native-community/netinfo": "^4.7.0",
+//import NetInfo from '@react-native-community';
 
 /* ERROR: index.js:1 Warning: Cannot update a component (`StackNavigator`) 
 while rendering a different component (`Chat`). To locate the bad setState() 
@@ -56,44 +59,51 @@ export class Chat extends React.Component {
     }
 
     componentDidMount() {
+        // check if the user is online
+        NetInfo.fetch().then((state) => {
+            if (state.isConnected) {
+                console.log('online');
+                // authentication anonymously in firebase
+                this.authUnsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
+                    if (!user) {
+                        try {
+                            await firebase.auth().signInAnonymously();
+                        }
+                        catch (error) {
+                            console.log(`Sign in failed: ${error.message}`);
+                        }
+                    }
 
-        // authentication anonymos in firebase
-        this.authUnsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
-            if (!user) {
-                await firebase.auth().signInAnonymously();
+                    //update user state with currently active user data
+                    this.setState({
+                        isConnected: true,
+                        //uid: user.uid,
+                        user: {
+                            _id: user.uid,
+                            name: this.props.route.params.name,
+                            //name: this.props.navigation.state.params.name,
+                            avatar: 'https://placeimg.com/140/140/any'
+                        },
+                        //loggedInText: 'Hello there',
+                        loggedInText: `${this.props.route.params.name} wrote`, // Expected .name to be passed, when bubble is rendered
+                        //loggedInText: `${this.props.navigation.state.params.name} wrote:`,
+                        messages: []
+                    });
+                    // display messages in chronological order & onSnapshot observer
+                    this.unsubscribe = this.referenceMessages.orderBy('createdAt', 'desc').onSnapshot(this.onCollectionUpdate);
+                    //this.unsubscribe = this.referenceMessages.onSnapshot(this.onCollectionUpdate) // ERROR: [react-native-gifted-chat] GiftedChat: `_id` is missing for message {"image":"","location":""}
+                });
+            } else {
+                this.setState({
+                    isConnected: false,
+                });
+
+                // load messages from Firebase
+                this.getMessages();
+                // prevent users from composing new messages in the InputToolbar  (=> contradiction?)
             }
-
-            //update user state with currently active user data
-            this.setState({
-                isConnected: true,
-                uid: user.uid,
-                user: {
-                    _id: user.uid,
-                    name: this.props.route.params.name,
-                    //name: this.props.navigation.state.params.name,
-                    avatar: 'https://placeimg.com/140/140/any'
-                },
-                //loggedInText: 'Hello there',
-                loggedInText: `${this.props.route.params.name} wrote`, // Expected .name to be passed, when bubble is rendered
-                //loggedInText: `${this.props.navigation.state.params.name} wrote:`,
-                messages: []
-            });
-
-            /*update user state with currently active user data
-            this.setState({
-                user: {
-                    _id: user._id,
-                    name: this.props.route.params.user,
-                },
-                messages: [],
-            });*/
+            // save new messages locally via asyncStorage (=> contradiction?)
         });
-
-        this.referenceMessages = firebase.firestore().collection('messages');
-
-        // display messages in chronological order & onSnapshot observer
-        this.unsubscribe = this.referenceMessages.orderBy('createdAt', 'desc').onSnapshot(this.onCollectionUpdate);
-        //this.unsubscribe = this.referenceMessages.onSnapshot(this.onCollectionUpdate) // ERROR: [react-native-gifted-chat] GiftedChat: `_id` is missing for message {"image":"","location":""}
     }
 
     componentWillUnmount() {
@@ -107,6 +117,7 @@ export class Chat extends React.Component {
             messages: GiftedChat.append(previousState.messages, messages),
         }), () => {
             this.addMessage();
+            this.saveMessages();
         })
     }
 
@@ -150,6 +161,44 @@ export class Chat extends React.Component {
             location: message.location || ''
         });
     }
+
+    // get all messages from AsynchStorage
+    getMessages = async () => {
+        let messages = [];
+        try {
+            messages = (await AsynchStorage.getItem('messages')) || [];
+            this.setState({
+                messages: JASON.parse(messages),
+            });
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+
+    // save all messages to AsynchStorage
+    saveMessages = async () => {
+        try {
+            await AsyncStorage.setItem(
+                'messages',
+                JSON.stringify(this.state.messages)
+            );
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+
+    // delete messages from AsynchStorage
+    deleteMessages = async () => {
+        try {
+            await AsyncStorage.removeItem('messages');
+            this.setState({
+                messages: []
+            })
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+
 
     render() {
         // Inherit username edited on start-page
@@ -196,6 +245,18 @@ export class Chat extends React.Component {
                 }
             />
         )
+    }
+
+    // render toolbar if online
+    renderInputToolbar(props) {
+        if (this.state.isConnected == false) {
+        } else {
+            return (
+                <InputToolbar
+                    {...props}
+                />
+            );
+        }
     }
 }
 
