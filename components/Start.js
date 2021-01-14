@@ -68,17 +68,18 @@ export default class Start extends React.Component {
     }
 }
 
-/* Styling section */
+/* Styling section ME */
 const styles = StyleSheet.create({
     title: {
         alignSelf: "center",
         justifyContent: "center",
         fontSize: 45,
-        fontWeight: '600',
+        fontWeight: 600,
         color: "#ffffff",
         flex: 1,
         marginTop: 80
     },
+
     container: {
         backgroundColor: "#ffffff",
         flex: 1,
@@ -90,10 +91,10 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 16,
-        fontWeight: '300',
+        fontWeight: 300,
         color: "#757083",
         borderColor: "#757083",
-        borderWidth: 1.5,
+        borderWidth: "1.5",
         width: "88%",
         height: "20%",
         marginTop: "5%",
@@ -101,10 +102,10 @@ const styles = StyleSheet.create({
     /* why the border is ignored simply? */
     textInput: {
         fontSize: 16,
-        fontWeight: '300',
+        fontWeight: 300,
         opacity: 50,
         color: "#757083",
-        borderWidth: 1,
+        borderWidth: "1",
         borderColor: "#757083",
         width: "88%",
         height: "50%",
@@ -148,7 +149,7 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         fontSize: 16,
-        fontWeight: '600',
+        fontWeight: 600,
         color: "#ffffff",
         marginTop: 10,
         justifyContent: "center",
