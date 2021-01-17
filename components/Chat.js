@@ -5,6 +5,9 @@ import AsyncStorage from '@react-native-community/async-storage';
 import NetInfo from '@react-native-community/netinfo'; // missing in depencies: "@react-native-community/netinfo": "^4.7.0",
 //import NetInfo from '@react-native-community';
 
+import CustomActions from './CustomActions'; //  (Ex 5.6)
+//import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+
 /* ERROR: index.js:1 Warning: Cannot update a component (`StackNavigator`) 
 while rendering a different component (`Chat`). To locate the bad setState() 
 call inside `Chat`, follow the stack trace as described in https://fb.me/setstate-in-render */
@@ -199,6 +202,35 @@ export class Chat extends React.Component {
             console.log(error.message);
         }
     };
+
+    // render custom actions: pickImage, takePhoto, shareLocation (Ex 5.6)
+    renderCustomActions = (props) => {
+        return <CustomActions {...props} />;
+    };
+
+    renderCustomView(props) {
+        const { currentMessage } = props;
+        if (currentMessage.location) {
+            return (
+                <MapView
+                    style={{
+                        width: 150,
+                        height: 100,
+                        borderRadius: 13,
+                        margin: 3
+                    }}
+                    provider={PROVIDER_GOOGLE}
+                    region={{
+                        latitude: currentMessage.location.latitude,
+                        longitude: currentMessage.location.longitude,
+                        latitudeDelta: 0.0922,
+                        longitudeDelta: 0.0421,
+                    }}
+                />
+            );
+        }
+        return null;
+    }
 
 
     render() {
