@@ -13,8 +13,9 @@ while rendering a different component (`Chat`). To locate the bad setState()
 call inside `Chat`, follow the stack trace as described in https://fb.me/setstate-in-render */
 
 // import Firestore
-const firebase = require('firebase');
-require('firebase/firestore');
+import firebase from 'firebase'; // check, if this works with Node.js, if YES, remove the following two lines 
+//const firebase = require('firebase'); // require is NOT ES6, but Node.js style
+//require('firebase/firestore');
 
 /* Create the chat component */
 export class Chat extends React.Component {
@@ -250,7 +251,9 @@ export class Chat extends React.Component {
                     justifyContent: 'center',
                     alignItems: 'center'
                 }}>
+
                 <GiftedChat
+                    renderActions={this.renderCustomActions.bind(this)}
                     renderBubble={this.renderBubble.bind(this)}
                     messages={this.state.messages}
                     onSend={messages => this.onSend(messages)}
@@ -259,7 +262,7 @@ export class Chat extends React.Component {
                 {/* avoid android keybords to overlay messages */}
                 {Platform.OS === 'android' ? <KeyboardAvoidingView behavior="height" /> : null}
             </View>
-        )
+        )  // removed this from GiftedChat, replaced by renderActions={this.renderCustomActions}
     }
 
     /* change the bubble color to distinguish between own messages and others' */

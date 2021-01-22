@@ -24,15 +24,15 @@ export default class Start extends React.Component {
                         accessibilityLabel="enter your name"
                         accessibilityHint="Lets others know your name."
                         accessibilityRole="button"
-                        borderWidth="1"
-                        borderColor="#757083"
+                        //borderWidth="1"
+                        //borderColor="#757083"
                         style={styles.textInput}
                         onChangeText={(text) => this.setState({ name: text })}
                         value={this.state.name}
                         placeholder='Your name ...'
                     />
                     <View style={styles.text}>
-                        <Text style={styles.text}>Choose backgorund color: </Text>
+                        <Text>Choose backgorund color: </Text>
                     </View>
                     <View style={styles.colorOption}>
                         {/* the color chosen is ignored currently */}
@@ -68,45 +68,42 @@ export default class Start extends React.Component {
     }
 }
 
-/* Styling section ME */
+/* Styling section AN */
 const styles = StyleSheet.create({
     title: {
         alignSelf: "center",
-        justifyContent: "center",
+        //justifyContent: "center",
         fontSize: 45,
-        fontWeight: 600,
+        fontWeight: '600',
         color: "#ffffff",
         flex: 1,
         marginTop: 80
     },
-
     container: {
         backgroundColor: "#ffffff",
         flex: 1,
         alignItems: "center",
-        justifyContent: "center",
+        //justifyContent: "center",
         height: "44%",
         width: "88%",
         margin: 20
     },
     text: {
         fontSize: 16,
-        fontWeight: 300,
+        fontWeight: '300',
         color: "#757083",
-        borderColor: "#757083",
-        borderWidth: "1.5",
         width: "88%",
         height: "20%",
         marginTop: "5%",
     },
-    /* why the border is ignored simply? */
     textInput: {
         fontSize: 16,
-        fontWeight: 300,
+        fontWeight: '300',
         opacity: 50,
         color: "#757083",
-        borderWidth: "1",
+        borderWidth: 1.5,
         borderColor: "#757083",
+        borderRadius: 2,
         width: "88%",
         height: "50%",
         marginTop: "5%",
@@ -149,7 +146,7 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         fontSize: 16,
-        fontWeight: 600,
+        fontWeight: '600',
         color: "#ffffff",
         marginTop: 10,
         justifyContent: "center",
