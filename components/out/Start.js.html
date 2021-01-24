@@ -1,4 +1,32 @@
-import React from 'react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Start.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Start.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
 import { View, Text, TextInput, ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
 
 /**
@@ -24,10 +52,10 @@ export default class Start extends React.Component {
 
     render() {
         return (
-            <ImageBackground source={backgroundImage} style={{ width: '100%', height: '100%' }}>
-                <Text style={styles.title}>Chat Bubble</Text>
-                <View style={styles.container}>
-                    <TextInput
+            &lt;ImageBackground source={backgroundImage} style={{ width: '100%', height: '100%' }}>
+                &lt;Text style={styles.title}>Chat Bubble&lt;/Text>
+                &lt;View style={styles.container}>
+                    &lt;TextInput
                         accessible={true}
                         accessibilityLabel="enter your name"
                         accessibilityHint="Lets others know your name."
@@ -37,38 +65,38 @@ export default class Start extends React.Component {
                         value={this.state.name}
                         placeholder='Your name ...'
                     />
-                    <View style={styles.text}>
-                        <Text>Choose backgorund color: </Text>
-                    </View>
-                    <View style={styles.colorOption}>
-                        <TouchableOpacity
+                    &lt;View style={styles.text}>
+                        &lt;Text>Choose backgorund color: &lt;/Text>
+                    &lt;/View>
+                    &lt;View style={styles.colorOption}>
+                        &lt;TouchableOpacity
                             onPress={() => this.setState({ colorChoice: "#090C08" })}
                             style={[styles.colorRadio, styles.color1]}>
-                        </TouchableOpacity>
-                        <TouchableOpacity
+                        &lt;/TouchableOpacity>
+                        &lt;TouchableOpacity
                             onPress={() => this.setState({ colorChoice: "#474056" })}
                             style={[styles.colorRadio, styles.color2]}>
-                        </TouchableOpacity>
-                        <TouchableOpacity
+                        &lt;/TouchableOpacity>
+                        &lt;TouchableOpacity
                             onPress={() => this.setState({ colorChoice: "#8A95A5" })}
                             style={[styles.colorRadio, styles.color3]}>
-                        </TouchableOpacity>
-                        <TouchableOpacity
+                        &lt;/TouchableOpacity>
+                        &lt;TouchableOpacity
                             onPress={() => this.setState({ colorChoice: "#B9C6AE" })}
                             style={[styles.colorRadio, styles.color4]}>
-                        </TouchableOpacity>
-                    </View>
-                    <TouchableOpacity
+                        &lt;/TouchableOpacity>
+                    &lt;/View>
+                    &lt;TouchableOpacity
                         accessible={true}
                         accessibilityLabel="Start Chatting"
                         accessibilityHint="Lets you enter the chat room."
                         accessibilityRole="button"
                         style={styles.button}
                         onPress={() => this.props.navigation.navigate('Chat', { name: this.state.name, colorChoice: this.state.colorChoice })}>
-                        <Text style={styles.buttonText}>Start Chatting</Text>
-                    </TouchableOpacity>
-                </View>
-            </ImageBackground>
+                        &lt;Text style={styles.buttonText}>Start Chatting&lt;/Text>
+                    &lt;/TouchableOpacity>
+                &lt;/View>
+            &lt;/ImageBackground>
         )
     }
 }
@@ -155,3 +183,26 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     }
 })
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#backgroundImage">backgroundImage</a></li><li><a href="global.html#render">render</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Sun Jan 24 2021 12:17:07 GMT+0100 (Mitteleuropäische Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
