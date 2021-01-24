@@ -2,6 +2,7 @@
 Chat Bubble is a chat app that allow users to enter a chat room to chat with other users.
 On the Start Page you can enter your real or a nick name and choose your favorite background color.
 After pressing "Start chat you can chat with other people, take photos or send images form you device or share you current location. 
+(/assets/ChatBubble_README.png)
 ## Getting started
 **Setup a database using Google Firebase**
 1. Got to https://firebase.google.com/ and login
